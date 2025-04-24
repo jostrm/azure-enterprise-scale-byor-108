@@ -33,7 +33,7 @@
             "value": false
         },
         "serviceSettingDeployAzureAIVision": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployAzureSpeech":{ 
             "value": false
