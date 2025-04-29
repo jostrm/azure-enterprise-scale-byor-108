@@ -12,34 +12,34 @@
             "value": false
         },
         "serviceSettingDeployFunction": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployWebApp": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployContainerApps": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployAppInsightsDashboard": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployBingSearch": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployCosmosDB": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployAzureOpenAI": {
             "value": false
         },
         "serviceSettingDeployAzureAIVision": {
-            "value": true
+            "value": false
         },
         "serviceSettingDeployAzureSpeech":{ 
-            "value": true
+            "value": false
         },
         "serviceSettingDeployAIDocIntelligence":{ 
-            "value": true
+            "value": false
         },
         "aiSearchEnableSharedPrivateLink_DOCS":{ 
             "value": "SharedPrivateLinks for Azure AI Search requires SKU standard2 or higher, you many need to apply for that. Alternative: In Azure Portal, AISearch, click Allow Azure services checkbox and do not created SharedPrivateLinks"
