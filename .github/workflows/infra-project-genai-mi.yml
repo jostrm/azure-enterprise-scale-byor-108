@@ -1,4 +1,4 @@
-name: infra-project-genai
+name: infra-project-genai-mi
 
 on:
     #push:
