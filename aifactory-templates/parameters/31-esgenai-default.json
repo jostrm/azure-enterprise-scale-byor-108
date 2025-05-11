@@ -9,7 +9,7 @@
             "value": true
         },
         "enablePublicAccessWithPerimeter": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployFunction": {
             "value": false
