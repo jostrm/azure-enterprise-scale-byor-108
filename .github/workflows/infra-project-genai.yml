@@ -319,6 +319,8 @@ jobs:
             }'
       - name: 05_az_bicep_deploy_genai_project
         uses: azure/cli@v2
+        env:
+          ARM_SKIP_VALIDATION: 1
         with:
           #working-directory: "${{ github.workspace }}/azure-enterprise-scale-ml/environment_setup/aifactory/bicep/"
           inlineScript: |
@@ -327,7 +329,7 @@ jobs:
             --name "esml-p${{ env.project_number_000 }}-${{ env.dev_test_prod }}-${{ env.admin_locationSuffix }}-${{ env.admin_prjResourceSuffix }}${{ env.admin_commonResourceSuffix }}$PrjDepl" \
             --subscription "${{ env.dev_test_prod_sub_id }}" \
             --location "${{ env.admin_location }}" \
-            --template-file "azure-enterprise-scale-ml\environment_setup\aifactory\bicep\esml-genai-1\32-main.bicep" --no-validate \
+            --template-file "azure-enterprise-scale-ml\environment_setup\aifactory\bicep\esml-genai-1\32-main.bicep" \
             --parameters adminPassword="$( date +%s | sha256sum | base64 | head -c 32 ; echo )" \
             --parameters @"./aifactory/parameters/10-esml-globals-1.json" \
             --parameters @"./aifactory/parameters/10-esml-globals-2-12_13_21_22.json" \
