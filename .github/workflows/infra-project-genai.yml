@@ -319,8 +319,6 @@ jobs:
             }'
       - name: 05_az_bicep_deploy_genai_project
         uses: azure/cli@v2
-        env:
-          ARM_SKIP_VALIDATION: 1
         with:
           #working-directory: "${{ github.workspace }}/azure-enterprise-scale-ml/environment_setup/aifactory/bicep/"
           inlineScript: |
