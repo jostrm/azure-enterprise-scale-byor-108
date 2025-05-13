@@ -9,7 +9,7 @@
             "value": true
         },
         "enablePublicAccessWithPerimeter": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployFunction": {
             "value": true
@@ -30,7 +30,7 @@
             "value": true
         },
         "serviceSettingDeployAzureOpenAI": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployAzureAIVision": {
             "value": false
