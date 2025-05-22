@@ -123,6 +123,7 @@ jobs:
         submodules: true
     - name: 01_pwsh_get_IP_for_GH_runner
       if: env.ENABLE_NETWORKING_JOB  != 'false'
+      continue-on-error: true
       run: |
         $resp = Invoke-RestMethod http://ipinfo.io/json | Select -exp ip
         echo "runner_ip=$resp" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
@@ -134,6 +135,7 @@ jobs:
         echo "The value of runner_ip is: ${{ env.runner_ip }}"
     - name: 02_az_set_ip_to_seeding_keyvault_FW_whitelist
       if: env.ENABLE_NETWORKING_JOB  != 'false'
+      continue-on-error: true
       uses: azure/cli@v2
       with:
         inlineScript: |
@@ -378,6 +380,7 @@ jobs:
             --parameters semanticSearchTier="${{ env.semanticSearchTier }}"
           azcliversion: latest
       - name: 06_az_remove_ip_from_seeding_keyvault_FW_whitelist
+        continue-on-error: true
         uses: azure/cli@v2
         with:
           inlineScript: | 
