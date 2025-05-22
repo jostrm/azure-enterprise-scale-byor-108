@@ -125,11 +125,12 @@ for env in "${environments[@]}"; do
     # Project Specifics (1st project bootstrap): 
     create_or_update_secret $env "PROJECT_MEMBERS" "$PROJECT_MEMBERS"
     create_or_update_secret $env "PROJECT_MEMBERS_IP_ADDRESS" "$PROJECT_MEMBERS_IP_ADDRESS"
-
     create_or_update_secret $env "TENANT_ID" "$TENANT_ID"
-    create_or_update_secret $env "BYO_SUBNETS" "$BYO_SUBNETS"
-    create_or_update_secret $env "AIFACTORY_VERSION_MAJOR" "$BYO_SUBNETS"
-    create_or_update_secret $env "AIFACTORY_VERSION_MINOR" "$AIFACTORY_VERSION_MINOR"
+    
+    # Variables: 
+    create_or_update_variable $env "BYO_SUBNETS" "$BYO_SUBNETS"
+    create_or_update_variable $env "AIFACTORY_VERSION_MAJOR" "$BYO_SUBNETS"
+    create_or_update_variable $env "AIFACTORY_VERSION_MINOR" "$AIFACTORY_VERSION_MINOR"
 done
 
 # DEV variables
