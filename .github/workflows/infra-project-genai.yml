@@ -331,7 +331,7 @@ jobs:
             #!/bin/bash
 
             az account set --subscription ${{ env.dev_test_prod_sub_id }}
-            
+
             # Input parameters
             commonRGNamePrefix="${{ env.admin_aifactoryPrefixRG }}"
             projectNumber="${{ env.project_number_000 }}"
@@ -486,7 +486,10 @@ jobs:
             --parameters network_env="${{ env.NETWORK_ENV }}" \
             --parameters aifactoryVersionMajor="${{ env.AIFACTORY_VERSION_MAJOR }}" \
             --parameters aifactoryVersionMinor="${{ env.AIFACTORY_VERSION_MINOR }}" \
-            --parameters semanticSearchTier="${{ env.semanticSearchTier }}"
+            --parameters semanticSearchTier="${{ env.semanticSearchTier }}" \
+            --parameters keyvaultExists="${{ env.keyvaultExists }}" \
+            --parameters aiSearchExists="${{ env.aiSearchExists }}" \
+            --parameters enableDebugging="true"
           azcliversion: latest
       - name: 06_az_remove_ip_from_seeding_keyvault_FW_whitelist
         continue-on-error: true
