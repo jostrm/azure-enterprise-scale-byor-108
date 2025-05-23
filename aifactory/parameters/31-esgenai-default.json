@@ -27,7 +27,7 @@
             "value": false
         },
         "serviceSettingDeployCosmosDB": {
-            "value": true
+            "value": false
         },
         "serviceSettingDeployAzureOpenAI": {
             "value": false
@@ -45,10 +45,10 @@
             "value": true
         },
         "serviceSettingDeployRedisCache":{ 
-            "value": true
+            "value": false
         },
         "serviceSettingDeploySQLDatabase":{ 
-            "value": true
+            "value": false
         },
         "disableContributorAccessForUsers": {
             "value": false
