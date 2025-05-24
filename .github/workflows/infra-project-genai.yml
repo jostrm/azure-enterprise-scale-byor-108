@@ -322,11 +322,11 @@ jobs:
             echo "Private DNS Subscription: $privDnsSubscription"
             echo "Private DNS Resource Group: $privDnsResourceGroupName"
             echo "Location: $location"
-
+            
             # Print the existence variables for debugging
             for key in "${!dnsZones[@]}"; do
               existsVarName="${key}Exists"
-              existsValue=$(printenv "$existsVarName") # Use printenv to get the value of the dynamically constructed variable
+              existsValue=$(eval echo "\$$existsVarName") # Use eval to dynamically access the variable
               echo "${existsVarName}=${existsValue}"
             done
           azcliversion: latest
