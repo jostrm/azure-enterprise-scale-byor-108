@@ -387,7 +387,7 @@ jobs:
               fi
             }
 
-            # Resource name variables (prefixes for fuzzy, full for exact)
+            # Resource name variables
 
             suffixStandard="${resourceSuffix}"
             suffixAIServices="${prjResourceSuffixNoDash}"
