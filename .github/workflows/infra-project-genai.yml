@@ -279,7 +279,7 @@ jobs:
 
             # Input parameters
             privDnsSubscription="${{ env.dev_test_prod_sub_id }}"
-            privDnsResourceGroupName="${{ env.admin_aifactoryPrefixRG }}esml-${{ env.project_number_000 }}-${{ env.admin_locationSuffix }}-${{ env.dev_test_prod }}${{ env.admin_aifactorySuffixRG }}-rg"
+            privDnsResourceGroupName="${{ env.admin_aifactoryPrefixRG }}esml-common-${{ env.admin_locationSuffix }}-${{ env.dev_test_prod }}${{ env.admin_aifactorySuffixRG }}"
             location="${{ env.admin_location }}"
 
             # Define key-value pairs for DNS Zones
