@@ -322,13 +322,7 @@ jobs:
             echo "Private DNS Subscription: $privDnsSubscription"
             echo "Private DNS Resource Group: $privDnsResourceGroupName"
             echo "Location: $location"
-            
-            # Print the existence variables for debugging
-            for key in "${!dnsZones[@]}"; do
-              existsVarName="${key}Exists"
-              existsValue=$(eval echo "\$$existsVarName") # Use eval to dynamically access the variable
-              echo "${existsVarName}=${existsValue}"
-            done
+
           azcliversion: latest
       - name: Check if resource exists
         uses: azure/cli@v2
@@ -397,16 +391,16 @@ jobs:
 
             suffixStandard="${resourceSuffix}"
             suffixAIServices="${prjResourceSuffixNoDash}"
-            suffixStorage1="1${prjResourceSuffixNoDash}${envName}" | tr -d '-')"
-            suffixStorage2="2${prjResourceSuffixNoDash}${envName}" | tr -d '-')"
+            suffixStorage1=$(echo "1${prjResourceSuffixNoDash}${envName}" | tr -d '-')
+            suffixStorage2=$(echo "2${prjResourceSuffixNoDash}${envName}" | tr -d '-')
             suffixAppServicePlan="${resourceSuffix}-plan"
             suffixKeyvault="${twoNumbers}"
 
             aiHubName="ai-hub-${projectName}-${locationSuffix}-${envName}"
             aifProjectName="aif-prj${projectNumber}-01-${locationSuffix}"
             amlName="aml-${projectName}-${locationSuffix}-${envName}"
-            openaiName = "aoai-${projectName}-${locationSuffix}-${env}"
-            safeNameAISearch="$(echo "aisearch${projectName}${locationSuffix}${envName})"
+            openaiName="aoai-${projectName}-${locationSuffix}-${env}"
+            safeNameAISearch="aisearch${projectName}${locationSuffix}${envName}"
             dashboardInsightsName="AIFactory${aifactorySuffixRG}-${projectName}-insights-${envName}"
             applicationInsightName="ain-${projectName}-${locationSuffix}-${envName}"
             aiServicesPrefix="ai-services-${projectName}-${locationSuffix}-${envName}"
