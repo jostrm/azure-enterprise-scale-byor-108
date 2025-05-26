@@ -11,6 +11,18 @@
         "enablePublicAccessWithPerimeter": {
             "value": true
         },
+        "enableAIServices": {
+            "value": true
+        },
+        "enableAIFoundryHub": {
+            "value": true
+        },
+        "enableAISearch": {
+            "value": true
+        },
+        "enableAML": {
+            "value": false
+        },
         "serviceSettingDeployFunction": {
             "value": false
         },
@@ -42,7 +54,7 @@
             "value": false
         },
         "serviceSettingDeployPostgreSQL":{ 
-            "value": true
+            "value": false
         },
         "serviceSettingDeployRedisCache":{ 
             "value": false

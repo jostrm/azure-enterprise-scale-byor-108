@@ -18,6 +18,8 @@ env:
     AIFACTORY_VERSION_MINOR: "${{ vars.AIFACTORY_VERSION_MINOR }}" # Minor as 21 in 1.21 
     BYO_SUBNETS: "${{ vars.BYO_SUBNETS }}" # Minor version of the AIFactory. 1 in 1.12
     NETWORK_ENV: "${{ vars.NETWORK_ENV }}" # Minor as 21 in 1.21 
+    AIFACTORY_SALT: "${{ vars.AIFACTORY_SALT }}" # random salt for the AIFactory.Determenistic salt, for datalake, storage, keyvault. Set before Datalake structure upload
+    AIFACTORY_SALT_RANDOM: "${{ vars.AIFACTORY_SALT_RANDOM }}" # random salt for the AIFactory. AIServices, ManagedIdentties. Set before UPDATING/Adding resoures
     
     # ADMIN usual culprits - verify, twice. (only configure once)
     admin_bicep_input_keyvault_subscription: "${{ secrets.AIFACTORY_SEEDING_KEYVAULT_SUBSCRIPTION_ID }}" # seeding keyvault, subscription id
@@ -394,6 +396,7 @@ jobs:
             suffixStorage1=$(echo "1${prjResourceSuffixNoDash}${envName}" | tr -d '-')
             suffixStorage2=$(echo "2${prjResourceSuffixNoDash}${envName}" | tr -d '-')
             suffixAppServicePlan="${resourceSuffix}-plan"
+            suffixAcr="${env}{prjResourceSuffixNoDash}"
             suffixKeyvault="${twoNumbers}"
 
             aiHubName="ai-hub-${projectName}-${locationSuffix}-${envName}"
@@ -423,6 +426,8 @@ jobs:
             postgreSQLName="pg-flex-${projectName}-${locationSuffix}-${envName}"
             sqlServerName="sql-${projectName}-${locationSuffix}-${envName}"
             sqlDBName="sqldb-${projectName}-${locationSuffix}-${envName}"
+            acrProjectName="acr${projectName}genai${locationSuffix}"
+            vmName="dsvm-${projectName}-${locationSuffix}-${env}"
 
             # Check resources (fuzzy for those with randomSalt,unique, exact for others)
             echo "aiHubExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.MachineLearningServices/workspaces" "$aiHubName" "$suffixStandard")" >> $GITHUB_ENV
@@ -452,6 +457,8 @@ jobs:
             echo "postgreSQLExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.DBforPostgreSQL/flexibleServers" "$postgreSQLName" "$suffixStandard")" >> $GITHUB_ENV
             echo "sqlServerExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.Sql/servers" "$sqlServerName" "$suffixStandard")" >> $GITHUB_ENV
             echo "sqlDBExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.Sql/servers/databases" "$sqlDBName" "$suffixStandard")" >> $GITHUB_ENV
+            echo "acrProjectExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.ContainerRegistry/registries" "$acrProjectName" "$suffixAcr")" >> $GITHUB_ENV
+            echo "vmExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.Compute/virtualMachines" "$vmName" "$suffixStandard")" >> $GITHUB_ENV
 
             # Print variables for debugging
             echo "Target Resource Group: $targetResourceGroup"
@@ -542,11 +549,14 @@ jobs:
             --parameters postgreSQLExists="${{ env.postgreSQLExists }}" \
             --parameters sqlServerExists="${{ env.sqlServerExists }}" \
             --parameters sqlDBExists="${{ env.sqlDBExists }}" \
+            --parameters acrProjectExists="${{ env.acrProjectExists }}" \
+            --parameters vmExists="${{ env.vmExists }}" \
             --parameters zoneAzurecontainerappsExists="${{ env.zoneazurecontainerappsExists }}" \
             --parameters zoneRedisExists="${{ env.zoneredisExists }}" \
             --parameters zonePostgresExists="${{ env.zonepostgresExists }}" \
             --parameters zoneSqlExists="${{ env.zonesqlExists }}" \
             --parameters zoneMongoExists="${{ env.zoneMongoExists }}" \
+            --parameters aifactorySalt7char="${{ env.AIFACTORY_SALT_RANDOM }}" \
             --parameters enableDebugging="true"
           azcliversion: latest
       - name: 06_az_remove_ip_from_seeding_keyvault_FW_whitelist
