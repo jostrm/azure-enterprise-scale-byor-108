@@ -419,8 +419,8 @@ jobs:
             keyvaultName="kv-p${projectNumber}-${locationSuffix}-${envName}"
             miACAPrefix="mi-aca-${projectName}-${locationSuffix}-${envName}"
             miPrjPrefix="mi-${projectName}-${locationSuffix}-${envName}"
-            storageAccount1001Name="sa${projectName}${locationSuffix})"
-            storageAccount2001Name="sa${projectName}${locationSuffix})"
+            storageAccount1001Name="sa${projectName}${locationSuffix}"
+            storageAccount2001Name="sa${projectName}${locationSuffix}"
             aifName="aif-hub-${projectName}-${locationSuffix}-${envName}"
             redisName="redis-${projectName}-${locationSuffix}-${envName}"
             postgreSQLName="pg-flex-${projectName}-${locationSuffix}-${envName}"
@@ -446,7 +446,7 @@ jobs:
             echo "functionAppExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.Web/sites" "$functionAppName" "$suffixStandard")" >> $GITHUB_ENV
             echo "webAppExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.Web/sites" "$webAppName" "$suffixStandard")" >> $GITHUB_ENV
             echo "funcAppServicePlanExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.Web/serverfarms" "$funcAppServicePlanName" "$suffixAppServicePlan")" >> $GITHUB_ENV
-            echo "webbAppServicePlanExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.Web/serverfarms" "$webbAppServicePlanName" "$suffixAppServicePlan")" >> $GITHUB_ENV
+            echo "webAppServicePlanExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.Web/serverfarms" "$webbAppServicePlanName" "$suffixAppServicePlan")" >> $GITHUB_ENV
             echo "keyvaultExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.KeyVault/vaults" "$keyvaultName" "$suffixKeyvault")" >> $GITHUB_ENV
             echo "miACAExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.ManagedIdentity/userAssignedIdentities" "$miACAPrefix" "$suffixStandard")" >> $GITHUB_ENV
             echo "miPrjExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.ManagedIdentity/userAssignedIdentities" "$miPrjPrefix" "$suffixStandard")" >> $GITHUB_ENV
@@ -538,7 +538,7 @@ jobs:
             --parameters functionAppExists="${{ env.functionAppExists }}" \
             --parameters webAppExists="${{ env.webAppExists }}" \
             --parameters funcAppServicePlanExists="${{ env.funcAppServicePlanExists }}" \
-            --parameters webbAppServicePlanExists="${{ env.webbAppServicePlanExists }}" \
+            --parameters webAppServicePlanExists="${{ env.webAppServicePlanExists }}" \
             --parameters keyvaultExists="${{ env.keyvaultExists }}" \
             --parameters miACAExists="${{ env.miACAExists }}" \
             --parameters miPrjExists="${{ env.miPrjExists }}" \
