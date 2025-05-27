@@ -507,7 +507,7 @@ jobs:
           for var in "${required_vars[@]}"; do
             # Remove the 'env.' prefix to get the actual environment variable name
             var_name="${var#env.}"
-            value=$(eval echo "\$$var_name")
+            value="${!var_name}"
             echo "Checking variable: $var, Value: $value"
             if [ -z "$value" ]; then
               echo "Error: Required environment variable $var is not set or empty."

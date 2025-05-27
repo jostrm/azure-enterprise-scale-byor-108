@@ -27,7 +27,7 @@
             "value": false
         },
         "serviceSettingDeployWebApp": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployContainerApps": {
             "value": false
