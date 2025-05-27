@@ -479,6 +479,56 @@ jobs:
             --parameters name="Kalle" \
             --parameters webAppServicePlanExists="${{ env.webAppServicePlanExists }}" \
             --parameters keyvaultExists="${{ env.keyvaultExists }}"
+      - name: Validate Required Parameters
+        run: |
+          # List of required environment variables
+          required_vars=(
+            "env.aiHubExists"  
+            "env.aifProjectExists"
+            "env.amlExists"   
+            "env.aiSearchExists" 
+            "env.dashboardInsightsExists"  
+            "env.applicationInsightExists"  
+            "env.aiServicesExists"  
+            "env.bingExists"
+            "env.containerAppsEnvExists"  
+            "env.containerAppWExists"
+            "env.cosmosDBExists"
+            "env.functionAppExists"
+            "env.webAppExists"
+            "env.funcAppServicePlanExists"
+            "env.webAppServicePlanExists"
+            "env.keyvaultExists"
+            "env.miACAExists"
+            "env.miPrjExists"
+            "env.storageAccount1001Exists"
+            "env.storageAccount2001Exists"
+            "env.aifExists"
+            "env.redisExists"
+            "env.postgreSQLExists"
+            "env.sqlServerExists"
+            "env.sqlDBExists"
+            "env.acrProjectExists"
+            "env.vmExists"
+            "env.zoneazurecontainerappsExists"
+            "env.zoneredisExists"
+            "env.zonepostgresExists"
+            "env.zonesqlExists"
+            "env.zoneMongoExists"
+            "env.AIFACTORY_SALT_RANDOM"
+          )
+
+          # Validate each variable
+          for var in "${required_vars[@]}"; do
+            value=$(eval echo "\$$var")
+            if [ -z "$value" ]; then
+              echo "Error: Required environment variable $var is not set or empty."
+              exit 1
+            fi
+          done
+
+          echo "All required parameters are set and valid."
+        shell: bash
       - name: 05_az_bicep_deploy_genai_project
         uses: azure/cli@v2
         with:
