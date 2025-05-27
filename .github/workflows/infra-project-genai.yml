@@ -506,11 +506,11 @@ jobs:
           # Validate each variable
           for var in "${required_vars[@]}"; do
             value=$(eval echo "\$$var")
+            echo "Checking variable: $var, Value: $value" # Add this line
             if [ -z "$value" ]; then
               echo "Error: Required environment variable $var is not set or empty."
               exit 1
             fi
-          done
 
           echo "All required parameters are set and valid."
         shell: bash
