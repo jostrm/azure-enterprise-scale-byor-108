@@ -464,21 +464,6 @@ jobs:
             echo "Target Resource Group: $targetResourceGroup"
             echo "Key Vault Name: $keyvaultName"
           azcliversion: latest
-      - name: DEBUG_az_bicep_deploy_genai_project
-        uses: azure/cli@v2
-        with:
-          #working-directory: "${{ github.workspace }}/azure-enterprise-scale-ml/environment_setup/aifactory/bicep/"
-          inlineScript: |
-            az account set --subscription ${{ env.dev_test_prod_sub_id }}
-            az deployment sub create \
-            --name "esml-p${{ env.project_number_000 }}-${{ env.dev_test_prod }}-${{ env.admin_locationSuffix }}-${{ env.admin_prjResourceSuffix }}${{ env.admin_commonResourceSuffix }}$PrjDepl" \
-            --subscription "${{ env.dev_test_prod_sub_id }}" \
-            --location "${{ env.admin_location }}" \
-            --template-file "azure-enterprise-scale-ml\environment_setup\aifactory\bicep\esml-genai-1\32-main-debug.bicep" \
-            --parameters location="${{ env.admin_location }}" \
-            --parameters name="Kalle" \
-            --parameters webAppServicePlanExists="${{ env.webAppServicePlanExists }}" \
-            --parameters keyvaultExists="${{ env.keyvaultExists }}"
       - name: Validate Required Parameters
         run: |
           # List of required environment variables
