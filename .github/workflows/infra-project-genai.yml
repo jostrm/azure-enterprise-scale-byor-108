@@ -610,7 +610,7 @@ jobs:
             --parameters zoneSqlExists="${{ env.zonesqlExists }}" \
             --parameters zoneMongoExists="${{ env.zoneMongoExists }}" \
             --parameters aifactorySalt7char="${{ env.AIFACTORY_SALT_RANDOM }}" \
-            --verbose
+            --debug
           azcliversion: latest
       - name: 06_az_remove_ip_from_seeding_keyvault_FW_whitelist
         continue-on-error: true
