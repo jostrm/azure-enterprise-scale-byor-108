@@ -53,6 +53,9 @@
         "serviceSettingDeployAIDocIntelligence":{ 
             "value": false
         },
+        "disableContributorAccessForUsers": {
+            "value": false
+        },
         "serviceSettingDeployPostgreSQL":{ 
             "value": true
         },
@@ -60,9 +63,6 @@
             "value": false
         },
         "serviceSettingDeploySQLDatabase":{ 
-            "value": false
-        },
-        "disableContributorAccessForUsers": {
             "value": false
         },
         "aiSearchEnableSharedPrivateLink_DOCS":{ 
