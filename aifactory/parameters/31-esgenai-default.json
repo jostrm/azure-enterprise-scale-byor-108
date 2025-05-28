@@ -21,7 +21,7 @@
             "value": true
         },
         "enableAML": {
-            "value": true
+            "value": false
         },
         "serviceSettingDeployFunction": {
             "value": false
@@ -30,10 +30,10 @@
             "value": true
         },
         "serviceSettingDeployContainerApps": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployAppInsightsDashboard": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployBingSearch": {
             "value": false
