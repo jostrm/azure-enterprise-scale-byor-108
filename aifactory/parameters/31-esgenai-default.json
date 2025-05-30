@@ -27,13 +27,13 @@
             "value": false
         },
         "serviceSettingDeployWebApp": {
-            "value": true
+            "value": false
         },
         "serviceSettingDeployContainerApps": {
-            "value": true
+            "value": false
         },
         "serviceSettingDeployAppInsightsDashboard": {
-            "value": true
+            "value": false
         },
         "serviceSettingDeployBingSearch": {
             "value": false
