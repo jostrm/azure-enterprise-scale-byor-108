@@ -567,7 +567,7 @@ jobs:
             value="${!var_name}"
             echo "Checking variable: $var, Value: $value"
             if [ -z "$value" ] || [ ${#value} -lt 4 ]; then
-              echo "Warning: Environment variable $var is not set, empty, or less than 4 characters (It should be 10 excact). AIFACTORY_SALT_RANDOM is fine to be empty, if you init a project, But needed if UPDATING a project/adding services"
+              echo "Warning: Environment variable $var is not set, empty, or less than 4 characters (It should be 10). AIFACTORY_SALT_RANDOM is fine to be empty, if you init a project, But needed if UPDATING a project/adding services"
             fi
           done
 
