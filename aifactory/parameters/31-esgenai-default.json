@@ -20,7 +20,7 @@
         "enableAISearch": {
             "value": true
         },
-        "enableAML": {
+        "enableAzureMachineLearning": {
             "value": false
         },
         "serviceSettingDeployFunction": {
