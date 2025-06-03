@@ -24,10 +24,22 @@
             "value": false
         },
         "serviceSettingDeployFunction": {
-            "value": false
+            "value": true
+        },
+        "functionRuntime": {
+            "value": "dotnet"
+        },
+        "functionVersion": {
+            "value": "v7.0"
         },
         "serviceSettingDeployWebApp": {
-            "value": false
+            "value": true
+        },
+        "webAppRuntime": {
+            "value": "python"
+        },
+        "webAppRuntimeVersion": {
+            "value": "3.11"
         },
         "serviceSettingDeployContainerApps": {
             "value": false
