@@ -42,10 +42,16 @@
             "value": "3.11"
         },
         "serviceSettingDeployContainerApps": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployAppInsightsDashboard": {
             "value": false
+        },
+        "aca_a_registry_image": {
+            "value": "containerapps-default:latest"
+        },
+        "aca_w_registry_image": {
+            "value": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest"
         },
         "serviceSettingDeployBingSearch": {
             "value": false
