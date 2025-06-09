@@ -655,6 +655,7 @@ jobs:
             "env.bingExists"
             "env.containerAppsEnvExists"  
             "env.containerAppWExists"
+            "env.containerAppAExists"
             "env.cosmosDBExists"
             "env.functionAppExists"
             "env.webAppExists"
