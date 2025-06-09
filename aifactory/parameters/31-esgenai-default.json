@@ -54,7 +54,7 @@
             "value": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest"
         },
         "serviceSettingDeployBingSearch": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployCosmosDB": {
             "value": false
