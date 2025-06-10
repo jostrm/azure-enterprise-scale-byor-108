@@ -606,6 +606,7 @@ jobs:
             acrProjectName="acr${projectName}genai${locationSuffix}"
             vmName="dsvm-${projectName}-${locationSuffix}-${env}"
 
+
             # Check resources (fuzzy for those with randomSalt,unique, exact for others)
             echo "aiHubExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.MachineLearningServices/workspaces" "$aiHubName" "$suffixStandard")" >> $GITHUB_ENV
             echo "aifProjectExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.MachineLearningServices/workspaces" "$aifProjectName" "$suffixStandard")" >> $GITHUB_ENV
@@ -633,7 +634,7 @@ jobs:
             echo "redisExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.Cache/Redis" "$redisName" "$suffixStandard")" >> $GITHUB_ENV
             echo "postgreSQLExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.DBforPostgreSQL/flexibleServers" "$postgreSQLName" "$suffixStandard")" >> $GITHUB_ENV
             echo "sqlServerExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.Sql/servers" "$sqlServerName" "$suffixStandard")" >> $GITHUB_ENV
-            echo "sqlDBExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.Sql/servers/databases" "$sqlDBName" "$suffixStandard")" >> $GITHUB_ENV
+            echo "sqlDBExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.Sql/servers/databases" "$sqlDBName" "*")" >> $GITHUB_ENV
             echo "acrProjectExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.ContainerRegistry/registries" "$acrProjectName" "$suffixAcr")" >> $GITHUB_ENV
             echo "vmExists=$(resource_exists_fuzzy "$targetResourceGroup" "Microsoft.Compute/virtualMachines" "$vmName" "$suffixStandard")" >> $GITHUB_ENV
 
