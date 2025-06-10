@@ -69,7 +69,7 @@
             "value": false
         },
         "serviceSettingDeployAIDocIntelligence":{ 
-            "value": true
+            "value": false
         },
         "disableContributorAccessForUsers": {
             "value": false
