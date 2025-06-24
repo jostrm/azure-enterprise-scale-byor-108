@@ -255,6 +255,17 @@ jobs:
         with:
           inlineScript: |
             az account set --subscription ${{ env.admin_bicep_input_keyvault_subscription }}
+            
+            echo "Setting Key Vault network access to 'selected networks'..."
+            az keyvault update --name ${{ env.admin_bicep_kv_fw }} \
+              --resource-group ${{ env.admin_bicep_kv_fw_rg }} 
+              --default-action Deny \
+              --public-network-access Enabled
+            
+            # Wait for network configuration to propagate
+            echo "Waiting for network configuration to propagate..."
+            sleep 15
+
             az keyvault network-rule add --resource-group ${{ env.admin_bicep_kv_fw_rg }} --name ${{ env.admin_bicep_kv_fw }} --ip-address $runner_ip
           azcliversion: latest
       - name: 03_az_download_seeding_keyvault
@@ -271,7 +282,7 @@ jobs:
         run: |
           sudo pwsh -Command "${{ github.workspace }}/azure-enterprise-scale-ml/environment_setup/aifactory/bicep/scripts/genDynamicNetworkParamFile.ps1 -spObjId '${{env.common-sp-appid-value}}' -spSecret '${{env.common-sp-secret-value}}' -useServicePrincipal -bicepPar1 '../../../../../aifactory/parameters/10-esml-globals-1.json' -bicepPar2 '../../../../../aifactory/parameters/10-esml-globals-2-12_13_21_22.json' -bicepPar3 '../../../../../aifactory/parameters/10-esml-globals-4-13_21_22.json' -bicepPar4 '../../../../../aifactory/parameters/21-22-esml-prj-parameters.json' -filePath '../../../../../aifactory/parameters/' -env '${{env.dev_test_prod}}' -locationSuffixADO '${{env.admin_locationSuffix}}' -aifactorySuffixRGADO '${{env.admin_aifactorySuffixRG}}' -commonRGNamePrefixVar '${{ env.admin_aifactoryPrefixRG }}' -projectNumber '${{ env.project_number_000 }}' -subscriptionId '${{env.dev_test_prod_sub_id}}' -bicepPar5 '../../../../../aifactory/parameters/10-esml-globals-override.json' -projectTypeADO '${{env.admin_projectType}}'"
         shell: pwsh
-      - name: 05_Build default image offline, to private registry (ACR) if not exists
+      - name: 05_Import_or_Build default image offline, to private registry (ACR) if not exists
         uses: azure/cli@v2
         with:
           inlineScript: |
@@ -288,6 +299,16 @@ jobs:
             
             # Set registry name for cleanup task
             echo "acr_registry_name=$registryName" >> $GITHUB_ENV
+
+            # Check if image already exists first (before any network configuration)
+            echo "Checking if image containerapps-default:latest already exists in registry..."
+            if az acr repository show --name $registryName --image containerapps-default:latest &> /dev/null; then
+              echo "✅  Image containerapps-default:latest already exists in registry $registryName"
+              echo "Skipping image creation and network configuration."
+              exit 0
+            fi
+            
+            echo "❌  Image does not exist, proceeding with creation..."
 
             # Configure ACR for selective network access
             echo "Configuring ACR for selective network access"
@@ -366,36 +387,32 @@ jobs:
             echo "Waiting for network rules to propagate..."
             sleep 30
             
-            # Check if image exists and create if needed
-            if az acr repository show --name $registryName --image containerapps-default:latest &> /dev/null; then
-              echo "Image exists, will not be overwritten"
-            else
-              echo "Image does not exist, creating new image..."
+            # Create the image (since we already confirmed it doesn't exist)
+            echo "Creating new image..."
+            
+            if [ "$use_public_image" = true ]; then
+              echo "Using public image: $mcr_ms_hello"
+              timestamp=$(date +%Y%m%d-%H%M%S)
               
-              if [ "$use_public_image" = true ]; then
-                echo "Using public image: $mcr_ms_hello"
-                timestamp=$(date +%Y%m%d-%H%M%S)
-                
-                echo "Importing public image to ACR with latest tag..."
-                az acr import --name $registryName \
-                              --source $mcr_ms_hello \
-                              --image containerapps-default:latest \
-                              --force
-                
-                echo "Importing public image to ACR with timestamp tag..."
-                az acr import --name $registryName \
-                              --source $mcr_ms_hello \
-                              --image containerapps-default:$timestamp \
-                              --force
-                
-                echo "Public image imported to ACR successfully!"
-              else
-                echo "Building custom image using ACR build..."
-                az acr build --registry $registryName \
+              echo "Importing public image to ACR with latest tag..."
+              az acr import --name $registryName \
+                            --source $mcr_ms_hello \
                             --image containerapps-default:latest \
-                            --file azure-enterprise-scale-ml/environment_setup/aifactory/dockerfiles/acaDefault/Dockerfile \
-                            azure-enterprise-scale-ml/environment_setup/aifactory/dockerfiles/acaDefault/
-              fi
+                            --force
+              
+              echo "Importing public image to ACR with timestamp tag..."
+              az acr import --name $registryName \
+                            --source $mcr_ms_hello \
+                            --image containerapps-default:$timestamp \
+                            --force
+              
+              echo "Public image imported to ACR successfully!"
+            else
+              echo "Building custom image using ACR build..."
+              az acr build --registry $registryName \
+                          --image containerapps-default:latest \
+                          --file azure-enterprise-scale-ml/environment_setup/aifactory/dockerfiles/acaDefault/Dockerfile \
+                          azure-enterprise-scale-ml/environment_setup/aifactory/dockerfiles/acaDefault/
             fi
 
             # Verify image was created successfully
@@ -404,7 +421,7 @@ jobs:
               echo "Image exists. Verified."
             else
               echo "Tried to verify Image, but it does NOT exist"
-              exit 0
+              exit 1
             fi
           azcliversion: latest
       - name: 05a_Check if Private DNS Zones exist
