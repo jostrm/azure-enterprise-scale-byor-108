@@ -258,7 +258,7 @@ jobs:
             
             echo "Setting Key Vault network access to 'selected networks'..."
             az keyvault update --name ${{ env.admin_bicep_kv_fw }} \
-              --resource-group ${{ env.admin_bicep_kv_fw_rg }} 
+              --resource-group ${{ env.admin_bicep_kv_fw_rg }} \
               --default-action Deny \
               --public-network-access Enabled
             
