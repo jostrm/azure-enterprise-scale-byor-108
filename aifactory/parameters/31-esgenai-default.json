@@ -12,13 +12,13 @@
             "value": true
         },
         "enableAIServices": {
-            "value": true
+            "value": false
         },
         "enableAIFoundryHub": {
-            "value": true
+            "value": false
         },
         "enableAISearch": {
-            "value": true
+            "value": false
         },
         "enableAzureMachineLearning": {
             "value": false
@@ -33,7 +33,7 @@
             "value": "v7.0"
         },
         "serviceSettingDeployWebApp": {
-            "value": true
+            "value": false
         },
         "webAppRuntime": {
             "value": "python"
@@ -42,7 +42,7 @@
             "value": "3.11"
         },
         "serviceSettingDeployContainerApps": {
-            "value": true
+            "value": false
         },
         "serviceSettingDeployAppInsightsDashboard": {
             "value": false
@@ -54,7 +54,7 @@
             "value": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest"
         },
         "serviceSettingDeployBingSearch": {
-            "value": true
+            "value": false
         },
         "serviceSettingDeployCosmosDB": {
             "value": false
@@ -81,7 +81,7 @@
             "value": false
         },
         "serviceSettingDeploySQLDatabase":{ 
-            "value": true
+            "value": false
         },
         "aiSearchEnableSharedPrivateLink_DOCS":{ 
             "value": "SharedPrivateLinks for Azure AI Search requires SKU standard2 or higher, you many need to apply for that. Alternative: In Azure Portal, AISearch, click Allow Azure services checkbox and do not created SharedPrivateLinks"
@@ -102,7 +102,7 @@
             "value": false
         },
         "deployModel_text_embedding_3_large": {
-            "value": true
+            "value": false
         },
         "deployModel_text_embedding_3_small": {
             "value": false
@@ -111,7 +111,7 @@
             "value": 25
         },
         "deployModel_gpt_4o_mini": {
-            "value": true
+            "value": false
         },
         "default_gpt_capacity": {
             "value": 40
