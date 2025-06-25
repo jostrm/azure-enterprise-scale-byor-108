@@ -12,13 +12,13 @@
             "value": true
         },
         "enableAIServices": {
-            "value": false
+            "value": true
         },
         "enableAIFoundryHub": {
-            "value": false
+            "value": true
         },
         "enableAISearch": {
-            "value": false
+            "value": true
         },
         "enableAzureMachineLearning": {
             "value": false
@@ -42,10 +42,10 @@
             "value": "3.11"
         },
         "serviceSettingDeployContainerApps": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployAppInsightsDashboard": {
-            "value": false
+            "value": true
         },
         "aca_a_registry_image": {
             "value": "containerapps-default:latest"
@@ -54,7 +54,7 @@
             "value": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest"
         },
         "serviceSettingDeployBingSearch": {
-            "value": false
+            "value": true
         },
         "serviceSettingDeployCosmosDB": {
             "value": false
@@ -75,7 +75,7 @@
             "value": false
         },
         "serviceSettingDeployPostgreSQL":{ 
-            "value": false
+            "value": true
         },
         "serviceSettingDeployRedisCache":{ 
             "value": false
@@ -99,7 +99,7 @@
             "value": ""
         },
         "deployModel_text_embedding_ada_002": {
-            "value": false
+            "value": true
         },
         "deployModel_text_embedding_3_large": {
             "value": false
@@ -111,7 +111,7 @@
             "value": 25
         },
         "deployModel_gpt_4o_mini": {
-            "value": false
+            "value": true
         },
         "default_gpt_capacity": {
             "value": 40
